@@ -48,3 +48,7 @@ app.*.map.json
 
 #Keys
 lib/utils/keys.dart
+
+#Google Files
+ios/Runner/GoogleService-Info.plist
+android/app/google-services.json
