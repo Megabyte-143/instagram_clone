@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/dimensions.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -27,11 +28,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return Scaffold(
         body: SafeArea(
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 32,
+        padding: EdgeInsets.symmetric(
+          horizontal: width * 0.07,
         ),
         width: double.infinity,
         child: Column(
@@ -48,14 +51,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 64,
             ),
 
-            const SizedBox(height: 64),
+            boxH64,
 
             //Cicular Widget to show our Selected File
             Stack(
               children: [
                 const CircleAvatar(
                   radius: 64,
-                  backgroundImage: NetworkImage(''),
+                  backgroundImage: NetworkImage(
+                      'https://images.unsplash.com/photo-1641792324071-d39bc9b73c40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDEyfENEd3V3WEpBYkV3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60'),
                 ),
                 Positioned(
                   bottom: -10,
@@ -70,7 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ],
             ),
 
-            const SizedBox(height: 24),
+            boxH24,
 
             // text input for userName
             TextFieldInput(
@@ -79,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               textInputType: TextInputType.text,
             ),
 
-            const SizedBox(height: 24),
+            boxH24,
 
             // text input for email
             TextFieldInput(
@@ -88,7 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               textInputType: TextInputType.emailAddress,
             ),
 
-            const SizedBox(height: 24),
+            boxH24,
 
             // text input for password
             TextFieldInput(
@@ -98,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               isPass: true,
             ),
 
-            const SizedBox(height: 24),
+            boxH24,
 
             // text input for bio
             TextFieldInput(
@@ -107,16 +111,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
               textInputType: TextInputType.text,
             ),
 
-            const SizedBox(height: 24),
+            boxH24,
 
             // button login
             GestureDetector(
               onTap: () {},
               child: Container(
-                child: const Text('Login'),
+                child: const Text('Sign Up'),
                 width: double.infinity,
                 alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: EdgeInsets.symmetric(vertical: height * 0.02),
                 decoration: const ShapeDecoration(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
@@ -128,7 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
 
-            const SizedBox(height: 12),
+            boxH12,
 
             Flexible(
               child: Container(),
@@ -140,20 +144,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
                 Container(
                   child: const Text(
-                    'Dont You Have an Account?',
+                    'Have an Account?',
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.symmetric(vertical: height * 0.01),
                 ),
+                boxW8,
                 GestureDetector(
                   onTap: () {},
                   child: Container(
                     child: const Text(
-                      'Sign Up.',
+                      'Login',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: EdgeInsets.symmetric(vertical: height * 0.01),
                   ),
                 )
               ],

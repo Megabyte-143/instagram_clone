@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/dimensions.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -23,11 +24,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return Scaffold(
         body: SafeArea(
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 32,
+        padding: EdgeInsets.symmetric(
+          horizontal: width * 0.07,
         ),
         width: double.infinity,
         child: Column(
@@ -44,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 64,
             ),
 
-            const SizedBox(height: 64),
+            boxH64,
 
             // text input for email
             TextFieldInput(
@@ -53,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
               textInputType: TextInputType.emailAddress,
             ),
 
-            const SizedBox(height: 24),
+            boxH24,
 
             // text input for password
             TextFieldInput(
@@ -63,16 +66,16 @@ class _LoginScreenState extends State<LoginScreen> {
               isPass: true,
             ),
 
-            const SizedBox(height: 24),
+            boxH24,
 
             // button login
             GestureDetector(
-              onTap: (){},
+              onTap: () {},
               child: Container(
                 child: const Text('Login'),
                 width: double.infinity,
                 alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: EdgeInsets.symmetric(vertical: height * 0.02),
                 decoration: const ShapeDecoration(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
@@ -84,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            const SizedBox(height: 12),
+            boxH12,
 
             Flexible(
               child: Container(),
@@ -98,10 +101,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: const Text(
                     'Dont You Have an Account?',
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.symmetric(vertical: height * 0.01),
                 ),
+                boxW8,
                 GestureDetector(
-                  onTap: (){},
+                  onTap: () {},
                   child: Container(
                     child: const Text(
                       'Sign Up.',
@@ -109,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: EdgeInsets.symmetric(vertical: height * 0.01),
                   ),
                 )
               ],
