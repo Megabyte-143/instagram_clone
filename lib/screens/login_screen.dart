@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram_clone/resources/auth_method.dart';
+import 'package:instagram_clone/responsive/mobile_screen_layout.dart';
+import 'package:instagram_clone/responsive/responsive_layout_screen.dart';
+import 'package:instagram_clone/responsive/web_screen_layout.dart';
+import 'package:instagram_clone/screens/signup_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/dimensions.dart';
+import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,12 +20,41 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
-
+  bool _isLoading = false;
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
     _passController.dispose();
+  }
+
+  void logInUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethods()
+        .logInUser(email: _emailController.text, pass: _passController.text);
+
+    if (res == 'Success') {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout(),
+          ),
+        ),
+      );
+    } else {
+      showSnackBar(content: res, context: context);
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  void navigateToSignUp() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => SignUpScreen()));
   }
 
   @override
@@ -70,9 +105,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
             // button login
             GestureDetector(
-              onTap: () {},
+              onTap: logInUser,
               child: Container(
-                child: const Text('Login'),
+                child: _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: primaryColor,
+                        ),
+                      )
+                    : const Text('Login'),
                 width: double.infinity,
                 alignment: Alignment.center,
                 padding: EdgeInsets.symmetric(vertical: height * 0.02),
@@ -105,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 boxW8,
                 GestureDetector(
-                  onTap: () {},
+                  onTap: navigateToSignUp,
                   child: Container(
                     child: const Text(
                       'Sign Up.',
